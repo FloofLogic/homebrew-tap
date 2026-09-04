@@ -1,6 +1,6 @@
-cask "md" do
-  version "0.9.12"
-  sha256 "133106fa08e1316419729178dab063329680027f2719c6e90e76e6cae2508bb5"
+cask "mardo" do
+  version "0.9.13"
+  sha256 "722fca0967a4953745da0cb860c7f4b988c01ed331f55fa89ecb3551fe205a8b"
 
   url "https://mardo.flooflogic.com/releases/Mardo-#{version}.zip"
   name "Mardo"
@@ -18,5 +18,5 @@ cask "md" do
   depends_on macos: :sonoma
 
   app "Mardo.app"
-  binary "Mardo.app/Contents/Helpers/md", target: "md"
+  binary "Mardo.app/Contents/Helpers/mardo", target: "mardo"
 end
