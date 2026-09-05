@@ -1,8 +1,8 @@
 class Floofclaw < Formula
   desc "Tiny C runtime for durable AI agents"
   homepage "https://floofclaw.com/"
-  url "https://github.com/FloofLogic/Floofclaw/releases/download/v0.30.0/floofclaw-v0.30.0-darwin-arm64.tar.gz"
-  sha256 "d4baf4ae452778e4f6e30b4902c8e35910d290a51f1cc03d5a2a32c6861734e9"
+  url "https://github.com/FloofLogic/Floofclaw/releases/download/v0.31.0/floofclaw-v0.31.0-darwin-arm64.tar.gz"
+  sha256 "55c0fecac91a7d61de24c40605a2ab7b9f8e41508b0aff17a8a3f600539f6353"
   license "Apache-2.0"
 
   depends_on arch: :arm64
