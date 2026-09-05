@@ -2,7 +2,7 @@ cask "mardo" do
   version "0.9.14"
   sha256 "abeaa1f151be0698bb843a1afd7bfb481c16f767e7890f2b7d0a9187e98bbd4d"
 
-  url "https://mardo.flooflogic.com/releases/Mardo-#{version}.zip"
+  url "https://github.com/FloofLogic/mardo/releases/download/v#{version}/Mardo.zip"
   name "Mardo"
   desc "Native file-first Markdown viewer and editor"
   homepage "https://mardo.app/"
