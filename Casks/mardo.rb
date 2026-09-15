@@ -20,21 +20,26 @@ cask "mardo" do
   app "Mardo.app"
   binary "Mardo.app/Contents/Helpers/mardo", target: "mardo"
 
-  postflight_steps do
-    run "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister",
-        args: ["-f", "-R", "{{appdir}}/Mardo.app"]
-    run "/usr/bin/pluginkit",
-        args: ["-a", "{{appdir}}/Mardo.app/Contents/PlugIns/MardoPreview.appex"]
-    run "/usr/bin/pluginkit",
-        args: ["-a", "{{appdir}}/Mardo.app/Contents/PlugIns/MardoThumbnail.appex"]
-    run "/usr/bin/pluginkit",
-        args: ["-e", "use", "-i", "com.flooflogic.mardo.QLPreview"]
-    run "/usr/bin/pluginkit",
-        args: ["-e", "use", "-i", "com.flooflogic.mardo.QLThumbnail"]
-    run "/usr/bin/qlmanage", args: ["-r"]
-    run "/usr/bin/qlmanage", args: ["-r", "cache"]
-    terminate_process "QuickLookUIService"
-    terminate_process "quicklookd"
-    terminate_process "com.apple.quicklook.ThumbnailsAgent"
+  # PlugInKit needs Mach services that Homebrew's structured-step sandbox blocks.
+  postflight do
+    application = "#{appdir}/Mardo.app"
+    preview = "#{application}/Contents/PlugIns/MardoPreview.appex"
+    thumbnail = "#{application}/Contents/PlugIns/MardoThumbnail.appex"
+    launch_services = "/System/Library/Frameworks/CoreServices.framework/" \
+                      "Frameworks/LaunchServices.framework/Support/lsregister"
+
+    system_command launch_services, args: ["-f", "-R", application]
+    system_command "/usr/bin/pluginkit", args: ["-a", preview]
+    system_command "/usr/bin/pluginkit", args: ["-a", thumbnail]
+    system_command "/usr/bin/pluginkit",
+                   args: ["-e", "use", "-i", "com.flooflogic.mardo.QLPreview"]
+    system_command "/usr/bin/pluginkit",
+                   args: ["-e", "use", "-i", "com.flooflogic.mardo.QLThumbnail"]
+    system_command "/usr/bin/qlmanage", args: ["-r"]
+    system_command "/usr/bin/qlmanage", args: ["-r", "cache"]
+    system_command "/usr/bin/killall",
+                   args: ["-9", "QuickLookUIService", "quicklookd",
+                          "com.apple.quicklook.ThumbnailsAgent"],
+                   must_succeed: false, print_stderr: false
   end
 end
