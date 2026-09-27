@@ -1,6 +1,6 @@
 cask "mardo" do
-  version "0.9.27"
-  sha256 "3d9e8ec62bab68dc3fd4890b0283351cc9e56d9c27c993c81dc9c8b1ea4f9b31"
+  version "0.9.28"
+  sha256 "3855d01c097707b9fd630aa46199bf811c9003ca9ff62dddd23677b894f209c4"
 
   url "https://github.com/FloofLogic/mardo/releases/download/v#{version}/Mardo.zip"
   name "Mardo"
@@ -41,5 +41,13 @@ cask "mardo" do
                    args: ["-9", "QuickLookUIService", "quicklookd",
                           "com.apple.quicklook.ThumbnailsAgent"],
                    must_succeed: false, print_stderr: false
+    # The signed helper asks macOS to make Mardo the .md default once per user.
+    # A denied OS consent request must not remove an otherwise usable app.
+    system_command "#{application}/Contents/Helpers/mardo",
+                   args: ["--claim-markdown-default-once"], must_succeed: false
   end
+
+  caveats "Mardo asks macOS to become the default app for .md files on first install. " \
+          "If the request is declined, select a .md file in Finder and use " \
+          "File > Get Info > Open with > Mardo > Change All."
 end
