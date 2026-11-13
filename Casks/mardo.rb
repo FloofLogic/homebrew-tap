@@ -1,6 +1,6 @@
 cask "mardo" do
-  version "1.1.0"
-  sha256 "971aa798bb15090ff22b8ff70c8186e84a44ddce2abe71d0e1f811cc9ba880b3"
+  version "1.1.1"
+  sha256 "ddab08deeef4d5d5b72dc3d75bbc53d47ba91f4990db5d11d4276e28dc892f93"
 
   url "https://github.com/FloofLogic/mardo/releases/download/v#{version}/Mardo.zip"
   name "Mardo"
